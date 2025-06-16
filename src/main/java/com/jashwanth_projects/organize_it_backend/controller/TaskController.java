@@ -48,6 +48,7 @@ public class TaskController {
             task.setTitle(taskDetails.getTitle());
             task.setDescription(taskDetails.getDescription());
             task.setCompleted(taskDetails.isCompleted());
+            task.setPriority(taskDetails.getPriority());
             
             return taskRepository.save(task);  // Save updated task
         } else {
@@ -64,6 +65,19 @@ public class TaskController {
         if (taskOptional.isPresent()) {
             taskRepository.deleteById(id);  // Delete the task
             return "Task with id " + id + " has been deleted successfully.";
+        } else {
+            throw new RuntimeException("Task not found with id: " + id);
+        }
+    }
+
+    // Get a task by id
+    @GetMapping("/{id}")
+    public Task getTaskById(@PathVariable String id) {
+        // Check if the task exists
+        Optional<Task> taskOptional = taskRepository.findById(id);
+        
+        if (taskOptional.isPresent()) {
+            return taskOptional.get();  // Return the found task
         } else {
             throw new RuntimeException("Task not found with id: " + id);
         }
