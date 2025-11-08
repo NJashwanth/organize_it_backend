@@ -1,6 +1,5 @@
 package com.jashwanth_projects.organize_it_backend.controller;
 
-
 import java.util.List;
 import java.util.Optional;
 
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.jashwanth_projects.organize_it_backend.model.Task;
 import com.jashwanth_projects.organize_it_backend.repository.TaskRepository;
-
 
 @RestController
 @RequestMapping("/tasks")
@@ -41,7 +39,7 @@ public class TaskController {
     public Task updateTaskupdateTask(@PathVariable String id, @RequestBody Task taskDetails) {
         // Check if the task exists
         Optional<Task> taskOptional = taskRepository.findById(id);
-        
+
         if (taskOptional.isPresent()) {
             Task task = taskOptional.get();
             // Update task properties
@@ -49,7 +47,7 @@ public class TaskController {
             task.setDescription(taskDetails.getDescription());
             task.setCompleted(taskDetails.isCompleted());
             task.setPriority(taskDetails.getPriority());
-            
+
             return taskRepository.save(task);  // Save updated task
         } else {
             throw new RuntimeException("Task not found with id: " + id);
@@ -61,7 +59,7 @@ public class TaskController {
     public String deleteTask(@PathVariable String id) {
         // Check if the task exists
         Optional<Task> taskOptional = taskRepository.findById(id);
-        
+
         if (taskOptional.isPresent()) {
             taskRepository.deleteById(id);  // Delete the task
             return "Task with id " + id + " has been deleted successfully.";
@@ -75,16 +73,12 @@ public class TaskController {
     public Task getTaskById(@PathVariable String id) {
         // Check if the task exists
         Optional<Task> taskOptional = taskRepository.findById(id);
-        
+
         if (taskOptional.isPresent()) {
             return taskOptional.get();  // Return the found task
         } else {
             throw new RuntimeException("Task not found with id: " + id);
         }
     }
-
-
-    
-
 
 }
