@@ -1,9 +1,10 @@
 package com.jashwanth_projects.organize_it_backend.model;
 
 
+import java.util.Objects;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import java.util.Objects;
 
 @Document(collection = "tasks") // This tells Spring Data MongoDB that this entity should be stored in the 'tasks' collection
 public class Task {
@@ -49,11 +50,11 @@ public class Task {
         this.description = description;
     }
 
-    public boolean isCompleted() {
+    public boolean getIsCompleted() {
         return isCompleted;
     }
 
-    public void setCompleted(boolean isCompleted) {
+    public void setIsCompleted(boolean isCompleted) {
         this.isCompleted = isCompleted;
     }
 

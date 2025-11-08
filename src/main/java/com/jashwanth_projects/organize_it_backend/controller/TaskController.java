@@ -45,7 +45,7 @@ public class TaskController {
             // Update task properties
             task.setTitle(taskDetails.getTitle());
             task.setDescription(taskDetails.getDescription());
-            task.setCompleted(taskDetails.isCompleted());
+            task.setIsCompleted(taskDetails.getIsCompleted());
             task.setPriority(taskDetails.getPriority());
 
             return taskRepository.save(task);  // Save updated task
