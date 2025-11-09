@@ -7,8 +7,6 @@ import java.util.Objects;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import jakarta.validation.constraints.NotBlank;
-
 @Document(collection = "tasks") // This tells Spring Data MongoDB that this entity should be stored in the 'tasks' collection
 public class Task {
 
@@ -19,8 +17,7 @@ public class Task {
     private boolean isCompleted;
     // ID of the TaskGroup this task belongs to (optional)
     private String groupId;
-    // Owner of the task (user id or similar)
-    @NotBlank(message = "ownerId must not be blank")
+
     private String ownerId;
     // Timestamps
     private Instant createdAt;
