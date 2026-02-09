@@ -12,6 +12,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
+                // Keep /tasks public for now; everything else requires auth.
                 .csrf(csrf -> csrf.disable()) // Disable CSRF for testing POST/PUT from tools like Postman
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers("/tasks/**").permitAll() // ✅ Allow public access to /tasks
