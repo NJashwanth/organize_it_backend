@@ -39,6 +39,7 @@ public class TaskGroupController {
         List<TaskGroupResponse> result = new ArrayList<>();
 
         for (TaskGroup group : groups) {
+            // Expand group into response DTO that includes full tasks.
             List<Task> tasks = taskRepository.findByGroupId(group.getId());
             TaskGroupResponse resp = new TaskGroupResponse(
                     group.getId(),
@@ -95,6 +96,7 @@ public class TaskGroupController {
         // Optionally: clear groupId from member tasks
         List<Task> tasks = taskRepository.findByGroupId(group.getId());
         for (Task t : tasks) {
+            // Keep tasks intact but detach them from the deleted group.
             t.setGroupId(null);
             taskRepository.save(t);
         }
