@@ -45,7 +45,7 @@ public class TaskController {
 
         Task saved = taskRepository.save(task);
 
-        // If task belongs to a group, add to group's tasksList
+        // Keep group task list in sync when a new task is created.
         String gid = saved.getGroupId();
         if (gid != null) {
             taskGroupRepository.findById(gid).ifPresent(g -> {
@@ -81,7 +81,7 @@ public class TaskController {
             Task saved = taskRepository.save(task);  // Save updated task
 
             String newGroupId = saved.getGroupId();
-            // If group changed, update group lists
+            // If group changed, update both groups' task lists.
             if (oldGroupId != null && !oldGroupId.equals(newGroupId)) {
                 taskGroupRepository.findById(oldGroupId).ifPresent(g -> {
                     if (g.getTasksList() != null) {
@@ -117,6 +117,7 @@ public class TaskController {
             Task task = taskOptional.get();
             String gid = task.getGroupId();
             if (gid != null) {
+                // Remove task reference from its group before deleting.
                 taskGroupRepository.findById(gid).ifPresent(g -> {
                     if (g.getTasksList() != null) {
                         g.getTasksList().remove(task.getId());
