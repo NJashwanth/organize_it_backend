@@ -9,6 +9,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 public class OrganizeItBackendApplication {
 
 	public static void main(String[] args) {
+		// Application entry point.
 		SpringApplication.run(OrganizeItBackendApplication.class, args);
 	}
 
